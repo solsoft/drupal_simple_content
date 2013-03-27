@@ -1,0 +1,9 @@
+name = Simple Content: Conclusion
+description = Simple Content module for small sites, Conclusion sub-module.
+core = 7.x
+package = Simple Content
+version = 7.x-1.0
+project = simple_content
+configure = admin/simple-content/conclusion
+files[] = simple_content_conclusion.admin.inc
+dependencies[] = simple_content

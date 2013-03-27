@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * simple_content_conclusion.install
+ * Install/Uninstall code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function simple_content_conclusion_install() {
+
+  // Conclusion Enabled?
+  variable_set('simple_content_conclusion_enabled', 0);
+
+  // Conclusion Header
+  variable_set('simple_content_conclusion_header', 'Sample header');
+
+  // Conclusion Body
+  variable_set('simple_content_conclusion_body', 'Sample body...');
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_content_conclusion_uninstall() {
+
+  // Conclusion Enabled?
+  $tmp = variable_get('simple_content_conclusion_enabled', NULL);
+  (isset($tmp)) ? variable_del('simple_content_conclusion_enabled') : '';
+
+  // Conclusion Header
+  $tmp = variable_get('simple_content_conclusion_header', NULL);
+  (isset($tmp)) ? variable_del('simple_content_conclusion_header') : '';
+
+  // Conclusion Body
+  $tmp = variable_get('simple_content_conclusion_body', NULL);
+  (isset($tmp)) ? variable_del('simple_content_conclusion_body') : '';
+
+}

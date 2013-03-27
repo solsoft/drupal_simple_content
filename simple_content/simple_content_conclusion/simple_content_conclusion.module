@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * simple_content_conclusion.module
+ * Main module code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function simple_content_conclusion_menu() {
+  $items = array();
+
+  // Conclusion section
+  $items['admin/simple-content/conclusion'] = array(
+    'title' => t('Conclusion'),
+    'description' => 'Conclusion section.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simple_content_conclusion_form'),
+    'access callback' => TRUE,
+    'access arguments' => array('administer simple content: conclusion section'),
+    'file' => 'simple_content_conclusion.admin.inc',
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function simple_content_conclusion_block_info() {
+  $blocks = array();
+
+  // Conclusion section block
+  $blocks['simple_content_conclusion'] = array(
+    'info' => t('Simple Content: Conclusion'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function simple_content_conclusion_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+
+    // Conclusion section block
+    case 'simple_content_conclusion':
+      $block['subject'] = NULL;
+      $block['content'] = array(
+        '#theme' => 'simple_content_conclusion',
+      );
+      break;
+
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function simple_content_conclusion_theme($cache, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'simple_content_conclusion');
+  $items = array();
+
+  // Conclusion section theme
+  $items['simple_content_conclusion'] = array(
+    'variables' => array(),
+    'template' => 'simple-content-conclusion',
+    'path' => $path . '/templates',
+  );
+
+  return $items;
+}

@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * simple_content.module
+ * Main module code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Debugging function.
+ */
+function simple_content_debug($value, $exit = FALSE) {
+  print('<pre>');
+  print_r($value);
+  print('</pre>');
+  ( !$exit ) ? : exit;
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function simple_content_menu() {
+  $items = array();
+
+  // Main settings
+  $items['admin/simple-content'] =
+  $items['admin/simple-content/settings'] = array(
+    'title' => t('Simple Content'),
+    'description' => 'Configure Simple Content.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simple_content_settings_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer simple content: settings'),
+    'file' => 'simple_content.admin.inc',
+    'weight' => 0,
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/simple-content/settings']['title'] = 'Settings';
+  $items['admin/simple-content/settings']['type'] = MENU_DEFAULT_LOCAL_TASK;
+
+  return $items;
+}

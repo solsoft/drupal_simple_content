@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * simple_content_banners.module
+ * Main module code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function simple_content_banners_menu() {
+  $items = array();
+
+  // Banners section
+  $items['admin/simple-content/banners'] = array(
+    'title' => t('Banners'),
+    'description' => 'Banners section.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simple_content_banners_form'),
+    'access callback' => TRUE,
+    'access arguments' => array('administer simple content: banners section'),
+    'file' => 'simple_content_banners.admin.inc',
+    'weight' => 30,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function simple_content_banners_block_info() {
+  $blocks = array();
+
+  // Banners section block
+  $blocks['simple_content_banners'] = array(
+    'info' => t('Simple Content: Banners'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function simple_content_banners_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+
+    // Banners section block
+    case 'simple_content_banners':
+      $block['subject'] = NULL;
+      $block['content'] = array(
+        '#theme' => 'simple_content_banners',
+      );
+      break;
+
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function simple_content_banners_theme($cache, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'simple_content_banners');
+  $items = array();
+
+  // Banners section theme
+  $items['simple_content_banners'] = array(
+    'variables' => array(),
+    'template' => 'simple-content-banners',
+    'path' => $path . '/templates',
+  );
+
+  return $items;
+}

@@ -1,0 +1,9 @@
+name = Simple Content
+description = Simple Content module for small sites.
+core = 7.x
+package = Simple Content
+version = 7.x-1.0
+project = simple_content
+configure = admin/simple-content
+files[] = simple_content.admin.inc
+dependencies[] = simple_content

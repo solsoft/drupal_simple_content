@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * simple_content_introduction.module
+ * Main module code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function simple_content_introduction_menu() {
+  $items = array();
+
+  // Introduction section
+  $items['admin/simple-content/introduction'] = array(
+    'title' => t('Introduction'),
+    'description' => 'Introduction section.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simple_content_introduction_form'),
+    'access callback' => TRUE,
+    'access arguments' => array('administer simple content: introduction section'),
+    'file' => 'simple_content_introduction.admin.inc',
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function simple_content_introduction_block_info() {
+  $blocks = array();
+
+  // Introduction section block
+  $blocks['simple_content_introduction'] = array(
+    'info' => t('Simple Content: Introduction'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function simple_content_introduction_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+
+    // Introduction section block
+    case 'simple_content_introduction':
+      $block['subject'] = NULL;
+      $block['content'] = array(
+        '#theme' => 'simple_content_introduction',
+      );
+      break;
+
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function simple_content_introduction_theme($cache, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'simple_content_introduction');
+  $items = array();
+
+  // Introduction section theme
+  $items['simple_content_introduction'] = array(
+    'variables' => array(),
+    'template' => 'simple-content-introduction',
+    'path' => $path . '/templates',
+  );
+
+  return $items;
+}

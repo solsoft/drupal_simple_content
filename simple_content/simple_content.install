@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * simple_content.install
+ * Install/Uninstall code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function simple_content_install() {
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_content_uninstall() {
+
+}

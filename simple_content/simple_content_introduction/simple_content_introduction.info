@@ -1,0 +1,9 @@
+name = Simple Content: Introduction
+description = Simple Content module for small sites, Introduction sub-module.
+core = 7.x
+package = Simple Content
+version = 7.x-1.0
+project = simple_content
+configure = admin/simple-content/introduction
+files[] = simple_content_introduction.admin.inc
+dependencies[] = simple_content

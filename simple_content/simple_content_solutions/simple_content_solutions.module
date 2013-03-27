@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * simple_content_solutions.module
+ * Main module code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function simple_content_solutions_menu() {
+  $items = array();
+
+  // Solutions section
+  $items['admin/simple-content/solutions'] = array(
+    'title' => t('Solutions'),
+    'description' => 'Solutions section.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simple_content_solutions_form'),
+    'access callback' => TRUE,
+    'access arguments' => array('administer simple content: solutions section'),
+    'file' => 'simple_content_solutions.admin.inc',
+    'weight' => 20,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function simple_content_solutions_block_info() {
+  $blocks = array();
+
+  // Solutions section block
+  $blocks['simple_content_solutions'] = array(
+    'info' => t('Simple Content: Solutions'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function simple_content_solutions_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+
+    // Solutions section block
+    case 'simple_content_solutions':
+      $block['subject'] = NULL;
+      $block['content'] = array(
+        '#theme' => 'simple_content_solutions',
+      );
+      break;
+
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function simple_content_solutions_theme($cache, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'simple_content_solutions');
+  $items = array();
+
+  // Solutions section theme
+  $items['simple_content_solutions'] = array(
+    'variables' => array(),
+    'template' => 'simple-content-solutions',
+    'path' => $path . '/templates',
+  );
+
+  return $items;
+}

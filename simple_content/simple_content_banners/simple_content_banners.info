@@ -1,0 +1,9 @@
+name = Simple Content: Banners
+description = Simple Content module for small sites, Banners sub-module.
+core = 7.x
+package = Simple Content
+version = 7.x-1.0
+project = simple_content
+configure = admin/simple-content/banners
+files[] = simple_content_banners.admin.inc
+dependencies[] = simple_content

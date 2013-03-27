@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * simple_content_contact.install
+ * Install/Uninstall code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function simple_content_contact_install() {
+
+  // Contact Enabled?
+  variable_set('simple_content_contact_enabled', 0);
+
+  // Contact Header
+  variable_set('simple_content_contact_header', 'Sample header');
+
+  // Contact Title
+  variable_set('simple_content_contact_title', 'My entity title');
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_content_contact_uninstall() {
+
+  // Contact Enabled?
+  $tmp = variable_get('simple_content_contact_enabled', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_enabled') : '';
+
+  // Contact Header
+  $tmp = variable_get('simple_content_contact_header', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_header') : '';
+
+  // Contact Title
+  $tmp = variable_get('simple_content_contact_title', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_title') : '';
+
+  // Contact Postal address
+  $tmp = variable_get('simple_content_contact_postal', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_postal') : '';
+
+  // Contact Country
+  $tmp = variable_get('simple_content_contact_country', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_country') : '';
+
+  // Contact Latitude
+  $tmp = variable_get('simple_content_contact_latitude', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_latitude') : '';
+
+  // Contact Longitude
+  $tmp = variable_get('simple_content_contact_longitude', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_longitude') : '';
+
+  // Contact Phone number
+  $tmp = variable_get('simple_content_contact_phone', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_phone') : '';
+
+  // Contact Fax number
+  $tmp = variable_get('simple_content_contact_fax', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_fax') : '';
+
+  // Contact Email address
+  $tmp = variable_get('simple_content_contact_email', NULL);
+  (isset($tmp)) ? variable_del('simple_content_contact_email') : '';
+
+}

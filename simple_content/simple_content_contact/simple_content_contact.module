@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * simple_content_contact.module
+ * Main module code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function simple_content_contact_menu() {
+  $items = array();
+
+  // Contact section
+  $items['admin/simple-content/contact'] = array(
+    'title' => t('Contact'),
+    'description' => 'Contact section.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simple_content_contact_form'),
+    'access callback' => TRUE,
+    'access arguments' => array('administer simple content: contact section'),
+    'file' => 'simple_content_contact.admin.inc',
+    'weight' => 40,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function simple_content_contact_block_info() {
+  $blocks = array();
+
+  // Contact section block
+  $blocks['simple_content_contact'] = array(
+    'info' => t('Simple Content: Contact'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function simple_content_contact_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+
+    // Contact section block
+    case 'simple_content_contact':
+      $block['subject'] = NULL;
+      $block['content'] = array(
+        '#theme' => 'simple_content_contact',
+      );
+      break;
+
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function simple_content_contact_theme($cache, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'simple_content_contact');
+  $items = array();
+
+  // Contact section theme
+  $items['simple_content_contact'] = array(
+    'variables' => array(),
+    'template' => 'simple-content-contact',
+    'path' => $path . '/templates',
+  );
+
+  return $items;
+}

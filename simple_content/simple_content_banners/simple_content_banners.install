@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * simple_content_banners.install
+ * Install/Uninstall code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function simple_content_banners_install() {
+
+  // Banners Enabled?
+  variable_set('simple_content_banners_enabled', 0);
+
+  // Banners Header
+  variable_set('simple_content_banners_header', 'Sample header');
+
+  // Number of banners
+  variable_set('simple_content_banners_number', 3);
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_content_banners_uninstall() {
+
+  // Banners Enabled?
+  $tmp = variable_get('simple_content_banners_enabled', NULL);
+  (isset($tmp)) ? variable_del('simple_content_banners_enabled') : '';
+
+  // Banners Header
+  $tmp = variable_get('simple_content_banners_header', NULL);
+  (isset($tmp)) ? variable_del('simple_content_banners_header') : '';
+
+  // Number of banners
+  $banners_number = variable_get('simple_content_banners_number', NULL);
+  (isset($banners_number)) ? variable_del('simple_content_banners_number') : '';
+  if ($banners_number > 0) {
+    // Loop through number of banners and delete all banners
+    for ($i = 1; $i <= $banners_number; $i++) {
+      // Make pid two digit algarism
+      $pid = str_pad($i, 2, '0', STR_PAD_LEFT);
+
+      // Banner Enabled?
+      $tmp = variable_get('simple_content_banners_' . $pid . '_enabled', NULL);
+      (isset($tmp)) ? variable_del('simple_content_banners_' . $pid . '_enabled') : '';
+
+      // Banner Title
+      $tmp = variable_get('simple_content_banners_' . $pid . '_title', NULL);
+      (isset($tmp)) ? variable_del('simple_content_banners_' . $pid . '_title') : '';
+
+      // Banner Thumbnail
+      $tmp = variable_get('simple_content_banners_' . $pid . '_thumbnail', NULL);
+      (isset($tmp)) ? variable_del('simple_content_banners_' . $pid . '_thumbnail') : '';
+
+    }
+  }
+
+}

@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * simple_content_solutions.install
+ * Install/Uninstall code
+ *
+ * Author: Luís Pedro Algarvio
+ * lpalgarvio, lpca
+ * lp.algarvio@gmail.com
+ * http://lp.algarvio.org
+ *
+ * Javali ADSI, Lda.
+ * http://www.javali.pt
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function simple_content_solutions_install() {
+
+  // Solutions Enabled?
+  variable_set('simple_content_solutions_enabled', 0);
+
+  // Solutions Header
+  variable_set('simple_content_solutions_header', 'Sample header');
+
+  // Number of solutions
+  variable_set('simple_content_solutions_number', 3);
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_content_solutions_uninstall() {
+
+  // Solutions Enabled?
+  $tmp = variable_get('simple_content_solutions_enabled', NULL);
+  (isset($tmp)) ? variable_del('simple_content_solutions_enabled') : '';
+
+  // Solutions Header
+  $tmp = variable_get('simple_content_solutions_header', NULL);
+  (isset($tmp)) ? variable_del('simple_content_solutions_header') : '';
+
+  // Number of solutions
+  $solutions_number = variable_get('simple_content_solutions_number', NULL);
+  ( isset($solutions_number) ) ? variable_del('simple_content_solutions_number') : '';
+  if ($solutions_number > 0) {
+    // Loop through number of solutions and delete all solutions
+    for ($i = 1; $i <= $solutions_number; $i++) {
+      // Make pid two digit algarism
+      $pid = str_pad($i, 2, '0', STR_PAD_LEFT);
+
+      // Solution Enabled?
+      $tmp = variable_get('simple_content_solutions_' . $pid . '_enabled', NULL);
+      (isset($tmp)) ? variable_del('simple_content_solutions_' . $pid . '_enabled') : '';
+
+      // Solution Title
+      $tmp = variable_get('simple_content_solutions_' . $pid . '_title', NULL);
+      (isset($tmp)) ? variable_del('simple_content_solutions_' . $pid . '_title') : '';
+
+      // Solution Menu Title
+      $tmp = variable_get('simple_content_solutions_' . $pid . '_menu', NULL);
+      (isset($tmp)) ? variable_del('simple_content_solutions_' . $pid . '_menu') : '';
+
+      // Solution Body
+      $tmp = variable_get('simple_content_solutions_' . $pid . '_body', NULL);
+      (isset($tmp)) ? variable_del('simple_content_solutions_' . $pid . '_body') : '';
+
+      // Solution Thumbnail
+      $tmp = variable_get('simple_content_solutions_' . $pid . '_thumbnail', NULL);
+      (isset($tmp)) ? variable_del('simple_content_solutions_' . $pid . '_thumbnail') : '';
+
+	}
+  }
+
+}
